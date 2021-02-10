@@ -14,7 +14,6 @@ public class NoDiagonalRule implements Rule {
                 return false;
             }
         }
-
         Point first = points.get(0);
         Point last = points.get(points.size() - 1);
         return first.getX().equals(last.getX()) || first.getY().equals(last.getY());
