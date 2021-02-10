@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Hello !</h1>
-<p>Welcome to Room area App</p>
-</body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="part/fragments :: head"></head>
+    <body>
+        <div th:replace="part/fragments :: top-menu"></div>
+        <h1>Hello!</h1>
+        <p>Welcome to Room area App</p>
+    </body>
 </html>

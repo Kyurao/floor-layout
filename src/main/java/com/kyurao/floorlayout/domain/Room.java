@@ -15,6 +15,13 @@ public class Room {
     @CollectionTable(name="ROOM_CORNERS", joinColumns=@JoinColumn(name="ROOM_ID"))
     private List<Point> points;
 
+    protected Room() {
+    }
+
+    public Room(List<Point> points) {
+        this.points = points;
+    }
+
     public Long getId() {
         return id;
     }

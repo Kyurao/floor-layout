@@ -1,10 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="part/fragments :: head"></head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h3>Here you can add new room</h3>
-</body>
+            <body>
+        <div th:replace="part/fragments :: top-menu"></div>
+        <script th:src="@{/js/createRoom.js}"></script>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center text-dark">Add room and create new room:</h4>
+                    <table class="table table-sm" id="cornerTable">
+                        <thead class="thead-dark text-center">
+                        <tr>
+                            <th style="width:33%">Coordinate X</th>
+                            <th style="width:33%">Coordinate Y</th>
+                            <th style="width:33%">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-dark text-white">X:</span>
+                        </div>
+                        <input type="text" class="form-control" id="coordinateX">
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-dark text-white">Y:</span>
+                        </div>
+                        <input type="text" class="form-control" id="coordinateY">
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <button type="button" class="btn btn-outline-dark w-100"
+                            th:onclick="addCorner()">Add corner</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="button"
+                            class="btn btn-dark w-100"
+                            th:onclick="createRoom()">Create room</button>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
