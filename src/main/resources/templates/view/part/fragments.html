@@ -1,0 +1,45 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${#strings.defaultString(title,'My Awesome Site')}">My Awesome Site</title>
+
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.min.js}"></script>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}"/>
+    <link th:rel="icon" type="image/png" th:href="@{/favicon.png}"/>
+</head>
+
+<!--Top menu-->
+<div th:fragment="top-menu">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="#" th:src="@{/img/logo.jpg}" width="50" height="50" alt="logo">
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" th:classappend="${topMenuElement} == 'home' ? 'active' : ''">
+                    <a class="nav-link" href="#" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item" th:classappend="${topMenuElement} == 'createRoom' ? 'active' : ''">
+                    <a class="nav-link" href="#" th:href="@{/room/add}">Create room</a>
+                </li>
+                <li class="nav-item" th:classappend="${topMenuElement} == 'viewRooms' ? 'active' : ''">
+                    <a class="nav-link" href="#" th:href="@{/room/all}">View rooms</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+</html>
