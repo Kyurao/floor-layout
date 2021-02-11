@@ -39,10 +39,7 @@ public class RoomController {
     @PostMapping("create")
     @ResponseBody
     public void create(@RequestBody RoomDto req) {
-        System.out.println(req.getRoom());
         List<Point> points = validatorService.getValidatedCorners(req.getRoom());
-        System.out.println(points);
-        //roomService.create(points);
     }
 
     @PostMapping("validateRoom")
