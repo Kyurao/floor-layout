@@ -5,13 +5,13 @@ import java.util.List;
 
 public class RoomDto {
 
-    private List<PointReq> room = new ArrayList<>();
+    private List<PointDto> room = new ArrayList<>();
 
-    public List<PointReq> getRoom() {
+    public List<PointDto> getRoom() {
         return room;
     }
 
-    public void setRoom(List<PointReq> room) {
+    public void setRoom(List<PointDto> room) {
         this.room = room;
     }
 }

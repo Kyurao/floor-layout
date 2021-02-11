@@ -1,7 +1,7 @@
 package com.kyurao.floorlayout.service;
 
 import com.kyurao.floorlayout.domain.Point;
-import com.kyurao.floorlayout.dto.PointReq;
+import com.kyurao.floorlayout.dto.PointDto;
 import com.kyurao.floorlayout.service.rules.AtLeastFourCornersRule;
 import com.kyurao.floorlayout.service.rules.NoDiagonalRule;
 import com.kyurao.floorlayout.service.rules.RoomFinishedArea;
@@ -25,7 +25,7 @@ public class ValidatorService {
         rules.add(new NoDiagonalRule());
     }
 
-    public List<Point> getValidatedCorners(List<PointReq> corners) {
+    public List<Point> getValidatedCorners(List<PointDto> corners) {
         List<Point> points = corners
                 .stream()
                 .map(this::toPoint)
@@ -35,7 +35,7 @@ public class ValidatorService {
         return points;
     }
 
-    private Point toPoint(PointReq req) {
+    private Point toPoint(PointDto req) {
         try {
             Integer x = Integer.valueOf(req.getX());
             Integer y = Integer.valueOf(req.getY());

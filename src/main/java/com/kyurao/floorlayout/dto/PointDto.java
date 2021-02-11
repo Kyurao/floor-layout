@@ -1,6 +1,6 @@
 package com.kyurao.floorlayout.dto;
 
-public class PointReq {
+public class PointDto {
 
     private String x;
 
