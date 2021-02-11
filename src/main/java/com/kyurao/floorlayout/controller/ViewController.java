@@ -20,14 +20,14 @@ public class ViewController {
                 .addObject(TOP_MENU_ELEMENT, "home");
     }
 
-    @GetMapping("room/add")
+    @GetMapping("view/add")
     public ModelAndView getViewForAddRoomPage() {
         return new ModelAndView("add-room")
                 .addObject(TITLE, "Create room")
                 .addObject(TOP_MENU_ELEMENT, "createRoom");
     }
 
-    @GetMapping("room/all")
+    @GetMapping("view/all")
     public ModelAndView getViewForAllRoomsPage() {
         return new ModelAndView("all-rooms")
                 .addObject(TITLE, "Rooms")
