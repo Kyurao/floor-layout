@@ -14,7 +14,7 @@ import static com.kyurao.floorlayout.constant.ViewConstants.TOP_MENU_ELEMENT;
 public class MainController {
 
     @GetMapping
-    public ModelAndView greeting() {
+    public ModelAndView getViewForHomePage() {
         return new ModelAndView("home")
                 .addObject(TITLE, "Main page")
                 .addObject(TOP_MENU_ELEMENT, "home");

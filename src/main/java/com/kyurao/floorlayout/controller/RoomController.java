@@ -23,14 +23,14 @@ public class RoomController {
     }
 
     @GetMapping("add")
-    public ModelAndView getViewForAdding() {
+    public ModelAndView getViewForAddRoomPage() {
         return new ModelAndView("add-room")
                 .addObject(TITLE, "Create room")
                 .addObject(TOP_MENU_ELEMENT, "createRoom");
     }
 
     @GetMapping("all")
-    public ModelAndView allRooms() {
+    public ModelAndView getViewForAllRoomsPage() {
         return new ModelAndView("all-rooms")
                 .addObject(TITLE, "Rooms")
                 .addObject(TOP_MENU_ELEMENT, "viewRooms");
