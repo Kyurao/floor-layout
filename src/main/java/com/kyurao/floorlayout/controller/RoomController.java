@@ -1,7 +1,9 @@
 package com.kyurao.floorlayout.controller;
 
 import com.kyurao.floorlayout.domain.Point;
+import com.kyurao.floorlayout.domain.Room;
 import com.kyurao.floorlayout.dto.RoomDto;
+import com.kyurao.floorlayout.service.RoomService;
 import com.kyurao.floorlayout.service.ValidatorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,12 @@ import static com.kyurao.floorlayout.constant.ViewConstants.TOP_MENU_ELEMENT;
 public class RoomController {
 
     private final ValidatorService validatorService;
+    private final RoomService roomService;
 
-    public RoomController(ValidatorService validatorService) {
+    public RoomController(ValidatorService validatorService,
+                          RoomService roomService) {
         this.validatorService = validatorService;
+        this.roomService = roomService;
     }
 
     @GetMapping("add")
@@ -40,6 +45,7 @@ public class RoomController {
     @ResponseBody
     public void create(@RequestBody RoomDto req) {
         List<Point> points = validatorService.getValidatedCorners(req.getRoom());
+        roomService.saveRoom(new Room(points));
     }
 
     @PostMapping("validateRoom")
