@@ -2,6 +2,7 @@ package com.kyurao.floorlayout.service;
 
 import com.kyurao.floorlayout.domain.Point;
 import com.kyurao.floorlayout.dto.PointDto;
+import com.kyurao.floorlayout.exception.RoomException;
 import com.kyurao.floorlayout.service.rules.AtLeastFourCornersRule;
 import com.kyurao.floorlayout.service.rules.NoDiagonalRule;
 import com.kyurao.floorlayout.service.rules.RoomFinishedArea;
@@ -30,6 +31,7 @@ public class ValidatorService {
                 .stream()
                 .map(this::toPoint)
                 .collect(Collectors.toList());
+
         validateWithReason(points);
 
         return points;
@@ -44,16 +46,15 @@ public class ValidatorService {
             point.setY(y);
             return point;
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Coordinates must be integers");
+            throw new RoomException("Coordinates must be integers");
         }
     }
 
-    void validateWithReason(List<Point> points) {
+    private void validateWithReason(List<Point> points) {
         for (Rule rule : rules) {
             if (!rule.validate(points)) {
-                new ValidInfo(false, rule.getMessage());
+                throw new RoomException(rule.getMessage());
             }
         }
-        new ValidInfo(true, "");
     }
 }
