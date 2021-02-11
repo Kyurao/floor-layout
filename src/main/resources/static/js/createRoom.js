@@ -47,22 +47,21 @@ async function createRoom() {
 
     const response = await fetch("/room/create", {
         headers: {
-            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         method: "POST",
         body: JSON.stringify(data)
     });
 
-    if (response.ok) {
+    const context = await response.json();
+    if (response.ok && !context.hasOwnProperty('error')) {
         window.location.href = '/room/all';
     } else {
-        const context = await response.json();
-        console.log("Request complete! response:", context);
         errorInform(context.error);
     }
 }
 
 function errorInform(errorMessage) {
-
+    $("#errorModal .modal-body").text(errorMessage);
+    $('#errorModal').modal('show');
 }
