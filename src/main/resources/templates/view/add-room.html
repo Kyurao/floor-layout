@@ -5,51 +5,79 @@
     <div class="container">
         <div th:replace="part/fragments :: top-menu"></div>
         <script th:src="@{/js/createRoom.js}"></script>
-            <div class="row">
-                <div class="col">
-                    <h4 class="text-center text-dark">Add room and create new room:</h4>
-                    <table class="table table-sm" id="cornerTable">
-                        <thead class="thead-dark text-center">
-                        <tr>
-                            <th style="width:33%">Coordinate X</th>
-                            <th style="width:33%">Coordinate Y</th>
-                            <th style="width:33%">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody class="text-center">
-                        </tbody>
-                    </table>
-                </div>
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center text-dark">Add room and create new room:</h4>
+                <table class="table table-sm" id="cornerTable">
+                    <thead class="thead-dark text-center">
+                    <tr>
+                        <th style="width:33%">Coordinate X</th>
+                        <th style="width:33%">Coordinate Y</th>
+                        <th style="width:33%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    </tbody>
+                </table>
             </div>
-            <div class="row">
-                <div class="col-sm-4 mb-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-dark text-white">X:</span>
+            <div class="modal" id="editModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-dark text-white">X:</span>
+                                </div>
+                                <input type="text" class="form-control" id="editX">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-dark text-white">Y:</span>
+                                </div>
+                                <input type="text" class="form-control" id="editY">
+                            </div>
                         </div>
-                        <input type="text" class="form-control" id="coordinateX">
+                        <div class="modal-footer">
+                            <button type="button"
+                                    class="btn btn-outline-dark"
+                                    data-dismiss="modal">Cancel</button>
+                            <button type="button"
+                                    class="btn btn-dark"
+                                    id="editSave">Save changes</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-dark text-white">Y:</span>
-                        </div>
-                        <input type="text" class="form-control" id="coordinateY">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white">X:</span>
                     </div>
-                </div>
-                <div class="col-sm-4 mb-3">
-                    <button type="button" class="btn btn-outline-dark w-100"
-                            th:onclick="addCorner()">Add corner</button>
+                    <input type="text" class="form-control" id="coordinateX">
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <button type="button"
-                            class="btn btn-dark w-100"
-                            th:onclick="createRoom()">Create room</button>
+            <div class="col-sm-4 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white">Y:</span>
+                    </div>
+                    <input type="text" class="form-control" id="coordinateY">
                 </div>
             </div>
+            <div class="col-sm-4 mb-3">
+                <button type="button" class="btn btn-outline-dark w-100"
+                        onclick="addCorner()">Add corner</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button"
+                        class="btn btn-dark w-100"
+                        th:onclick="createRoom()">Create room</button>
+            </div>
+        </div>
         </div>
     </body>
 </html>
