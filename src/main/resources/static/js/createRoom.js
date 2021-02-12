@@ -1,45 +1,46 @@
 const arr = [];
 
 function addCorner() {
-    const table = document.getElementById('cornerTable');
 
-    const coordinateX = document.getElementById("coordinateX").value;
-    const coordinateY = document.getElementById("coordinateY").value;
-    let rowCnt = table.rows.length;    // get the number of rows
-    arr[rowCnt - 1] = {x: coordinateX, y: coordinateY};
-    let tr = table.insertRow(rowCnt); // add table row
+    let selX = $('#coordinateX');
+    let selY = $('#coordinateY');
+    const x = selX.val();
+    const y = selY.val();
 
-    createValueColumn(0, coordinateX);
-    createValueColumn(1, coordinateY);
+    const rowCnt = $('#cornerTable tbody tr').length;  // get the number of body rows
+    arr[rowCnt] = {x: x, y: y};
 
-    const tdButton = tr.insertCell(2);
-    const button = document.createElement('input');
-    button.setAttribute('type', 'button');
-    button.setAttribute('value', 'Remove');
-    button.setAttribute('class', 'btn btn-outline-secondary w-50');
-    button.setAttribute('onclick', 'removeCorner(this)');
-    tdButton.appendChild(button);
+    $('#cornerTable tbody')
+        .append($('<tr>')
+            .append($('<td>')
+                .append($('<span>')
+                    .text(x)
+                )
+            )
+            .append($('<td>')
+                .append($('<span>')
+                    .text(y)
+                )
+            )
+            .append($('<td>')
+                .append($('<input>')
+                    .attr('type', 'button')
+                    .attr('value', 'Remove')
+                    .attr('class', 'btn btn-outline-secondary w-50')
+                    .attr('onclick', 'removeCorner(this)')
+                )
+            )
+        );
 
-    clearInput();
-
-    function createValueColumn(colIndex, value) {
-        const td = tr.insertCell(colIndex);
-        const ele = document.createElement('span');
-        ele.textContent = value;
-        td.appendChild(ele);
-    }
-
-    function clearInput() {
-        document.getElementById("coordinateX").value = '';
-        document.getElementById("coordinateY").value = '';
-    }
+    selX.val(''); // clear inputs
+    selY.val('');
 }
 
 function removeCorner(oButton) {
-    const table = document.getElementById('cornerTable');
-    let index = oButton.parentNode.parentNode.rowIndex; // buttton -> td -> tr
-    table.deleteRow(index);
-    arr.splice(index - 1, 1);
+    const row = $(oButton).closest('tr');
+    const index = row.index();
+    arr.splice(index, 1);
+    row.remove();
 }
 
 async function createRoom() {
