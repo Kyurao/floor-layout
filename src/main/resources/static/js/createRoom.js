@@ -11,7 +11,7 @@ function addCorner() {
     arr[index] = {x: x, y: y};
 
     $('#cornerTable tbody')
-        .append($('<tr>')
+        .append($('<tr id="'+ counter +'">')
             .append($('<td>')
                 .append($('<span>')
                     .text(x)
@@ -45,6 +45,7 @@ function addCorner() {
 function removeCorner(oButton) {
     const row = $(oButton).closest('tr');
     const index = row.index();
+    console.log('remove=' + index);
     arr.splice(index, 1);
     row.remove();
 }
@@ -52,21 +53,21 @@ function removeCorner(oButton) {
 function editCorner(oButton) {
     const row = $(oButton).closest('tr');
     const index = row.index();
-
-    const selEditX = $('#editX');
-    const selEditY = $('#editY');
-    selEditX.val(arr[index].x);
-    selEditY.val(arr[index].y);
+    const $editX = $('#editX');
+    const $editY = $('#editY');
+    $editX.val($(row).find('td:eq(0)').find('span').text());
+    $editY.val($(row).find('td:eq(1)').find('span').text());
+    $('#editSave').val(index);
     $('#editModal').modal('show');
-    $('#editSave').click(function () {
-        const x = selEditX.val();
-        const y = selEditY.val();
-        arr[index].x = x;
-        arr[index].y = y;
-        $(row).find("td").eq(0).text(x);
-        $(row).find("td").eq(1).text(y);
-        $('#editModal').modal('hide');
-    });
+
+}
+
+function saveEditing(oButton) {
+    const index = $(oButton).val();
+    const row = $('#cornerTable tbody').find('tr:eq(' + index + ')');
+    row.find('td:eq(0)').find('span').text($('#editX').val());
+    row.find('td:eq(1)').find('span').text($('#editY').val());
+    $('#editModal').modal('hide');
 }
 
 async function createRoom() {
