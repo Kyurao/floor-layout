@@ -1,17 +1,12 @@
-const arr = [];
-
 function addCorner() {
 
-    let selX = $('#coordinateX');
-    let selY = $('#coordinateY');
-    const x = selX.val();
-    const y = selY.val();
-
-    const index = $('#cornerTable tbody tr').length;  // get the number of body rows
-    arr[index] = {x: x, y: y};
+    let $x = $('#coordinateX');
+    let $y = $('#coordinateY');
+    const x = $x.val();
+    const y = $y.val();
 
     $('#cornerTable tbody')
-        .append($('<tr id="'+ counter +'">')
+        .append($('<tr>')
             .append($('<td>')
                 .append($('<span>')
                     .text(x)
@@ -38,25 +33,19 @@ function addCorner() {
             )
         );
 
-    selX.val(''); // clear inputs
-    selY.val('');
+    $x.val(''); // clear inputs
+    $y.val('');
 }
 
 function removeCorner(oButton) {
-    const row = $(oButton).closest('tr');
-    const index = row.index();
-    console.log('remove=' + index);
-    arr.splice(index, 1);
-    row.remove();
+    $(oButton).closest('tr').remove();
 }
 
 function editCorner(oButton) {
     const row = $(oButton).closest('tr');
     const index = row.index();
-    const $editX = $('#editX');
-    const $editY = $('#editY');
-    $editX.val($(row).find('td:eq(0)').find('span').text());
-    $editY.val($(row).find('td:eq(1)').find('span').text());
+    $('#editX').val($(row).find('td:eq(0)').find('span').text());
+    $('#editY').val($(row).find('td:eq(1)').find('span').text());
     $('#editSave').val(index);
     $('#editModal').modal('show');
 
@@ -70,8 +59,20 @@ function saveEditing(oButton) {
     $('#editModal').modal('hide');
 }
 
+function readTableValues() {
+    const arr = [];
+    let i = 0;
+    $('#cornerTable tbody').find('tr').each(function () {
+        arr[i] = {x: $(this).find('td:eq(0)').find('span').text(),
+                  y: $(this).find('td:eq(1)').find('span').text()};
+        i++;
+    });
+    return arr;
+}
+
 async function createRoom() {
-    let data = {room: arr};
+    let data = {room: readTableValues()};
+    console.log(data);
 
     const response = await fetch("/room/create", {
         headers: {
