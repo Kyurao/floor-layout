@@ -92,16 +92,16 @@ async function createRoom() {
     }
 }
 
-function getRoom(roomId) {
+async function getRoom(roomId) {
     const url = "/room/" + roomId;
-    const response = fetch(url, {
+    const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json'
         },
         method: "GET"
     });
 
-    const context = response.json();
+    const context = await response.json();
     if (response.ok && context.hasOwnProperty('corners')) {
         const corners = context.corners;
         for (let i = 0; i < corners.length; i++) {

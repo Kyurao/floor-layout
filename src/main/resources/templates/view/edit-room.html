@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="part/fragments :: head"></head>
-    <body>
+    <body onload="">
         <div class="container">
             <div th:replace="part/fragments :: top-menu"></div>
-            <script th:src="@{/js/create-edit-room.jsm.js}"></script>
+            <script th:src="@{/js/create-edit-room.js}"></script>
             <div class="row">
                 <div class="col">
                     <h4 class="text-center text-dark">Edit room:</h4>
@@ -51,8 +51,9 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" id="roomId" th:value="${roomId}"/>
-            <script type="text/javascript">getRoom($('#roomId'));</script>
+            <script th:inline="javascript">
+                getRoom([[${roomId}]]);
+            </script>
             <div class="row">
                 <div class="col-sm-4 mb-3">
                     <div class="input-group">
