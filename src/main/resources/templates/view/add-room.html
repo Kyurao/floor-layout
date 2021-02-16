@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="part/fragments :: head"></head>
-    <body>
+<head th:replace="part/fragments :: head"></head>
+<body>
     <div class="container">
         <div th:replace="part/fragments :: top-menu"></div>
         <script th:src="@{/js/create-edit-room.js}"></script>
@@ -81,6 +81,6 @@
                         th:onclick="saveRoom()">Create room</button>
             </div>
         </div>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

@@ -2,40 +2,41 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="part/fragments :: head"></head>
 <body>
-<div th:replace="part/fragments :: top-menu"></div>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h4 class="text-center text-dark">All saved rooms:</h4>
-            <table class="table table-sm" id="roomsTable">
-                <thead class="thead-dark text-center">
-                <tr>
-                    <th style="width:10%">#</th>
-                    <th style="width:10%">Number of Corners</th>
-                    <th style="width:80%">Action</th>
-                </tr>
-                </thead>
-                <tbody class="text-center">
-                <!--Проходимо циклом таймліфа по листу кімнат переданому з бека і заповнюємо клітинки таблиці-->
-                <!--<tr>-->
-                <!--<td>roooms[i].id</td>-->
-                <!--<td>roooms[i].numberOfCorners</td>-->
-                <td></td>
-                <td></td>
-                <td>
-                    <div class="input-group">
-                        <button type="button" class="btn btn-outline-dark w-100"
-                                th:onclick="view()">View</button>
-                        <button type="button" class="btn btn-outline-dark w-100"
-                                th:onclick="edit()">Edit</button>
-                        <button type="button" class="btn btn-outline-dark w-100"
-                                th:onclick="delete()">Delete</button>
-                    </div>
-                </td>
-                </tbody>
-            </table>
+    <div class="container">
+        <div th:replace="part/fragments :: top-menu"></div>
+        <script th:src="@{/js/all-rooms.js}"></script>
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center text-dark">All saved rooms:</h4>
+                <table class="table table-sm" id="roomsTable">
+                    <thead class="thead-dark text-center">
+                    <tr>
+                        <th style="width:10%">#</th>
+                        <th style="width:10%">Number of Corners</th>
+                        <th style="width:80%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    <!--Проходимо циклом таймліфа по листу кімнат переданому з бека і заповнюємо клітинки таблиці-->
+                    <!--<tr>-->
+                    <!--<td>roooms[i].id</td>-->
+                    <!--<td>roooms[i].numberOfCorners</td>-->
+                    <td>1</td>
+                    <td>4</td>
+                    <td class="">
+                        <div class="input-group px-3">
+                            <button type="button" class="btn btn-outline-dark w-25 mx-auto"
+                                    th:onclick="view()">View</button>
+                            <button type="button" class="btn btn-outline-dark w-25 mx-auto"
+                                    th:onclick="edit()">Edit</button>
+                            <button type="button" class="btn btn-outline-dark w-25 mx-auto"
+                                    th:onclick="delete()">Delete</button>
+                        </div>
+                    </td>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
