@@ -59,7 +59,7 @@ public class RoomService {
     private RoomRes roomToDto(Room room) {
         RoomRes res = new RoomRes();
         res.setId(room.getId());
-        res.setQuantity(room.getPoints().size());
+        res.setSize(room.getPoints().size());
         res.setCorners(room.getPoints());
 
         return res;

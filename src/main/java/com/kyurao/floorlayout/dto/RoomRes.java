@@ -8,7 +8,7 @@ public class RoomRes {
 
     private Long id;
 
-    private Integer quantity;
+    private Integer size;
 
     private List<Point> corners;
 
@@ -20,12 +20,12 @@ public class RoomRes {
         this.id = id;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     public List<Point> getCorners() {
