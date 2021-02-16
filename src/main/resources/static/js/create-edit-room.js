@@ -67,15 +67,22 @@ function readTableValues() {
     return arr;
 }
 
-async function createRoom() {
+async function saveRoom(id) {
     const data = {room: readTableValues()};
-    console.log(data);
+    const headers = {'Content-Type': 'application/json'};
+    let path;
+    let method;
+    if (id == null) {
+        method = 'POST';
+        path = '/room/create';
+    } else {
+        method = 'PUT';
+        path = '/room/update/' + id;
+    }
 
-    const response = await fetch("/room/create", {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: "POST",
+    const response = await fetch(path, {
+        headers: headers,
+        method: method,
         body: JSON.stringify(data)
 
     });
@@ -88,7 +95,7 @@ async function createRoom() {
             errorInform(context.message);
         }
     } else {
-        window.location.href = '/room/all';
+        window.location.href = '/view/all';
     }
 }
 
