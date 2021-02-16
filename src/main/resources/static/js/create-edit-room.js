@@ -1,9 +1,4 @@
-function addCorner() {
-
-    let $x = $('#coordinateX');
-    let $y = $('#coordinateY');
-    const x = $x.val();
-    const y = $y.val();
+function addCorner(x, y) {
 
     $('#cornerTable tbody')
         .append($('<tr>')
@@ -32,8 +27,10 @@ function addCorner() {
                 )
             )
         );
+}
 
-    $x.val(''); // clear inputs
+function clearInput($x, $y) {
+    $x.val('');
     $y.val('');
 }
 
@@ -71,7 +68,7 @@ function readTableValues() {
 }
 
 async function createRoom() {
-    let data = {room: readTableValues()};
+    const data = {room: readTableValues()};
     console.log(data);
 
     const response = await fetch("/room/create", {
@@ -80,12 +77,38 @@ async function createRoom() {
         },
         method: "POST",
         body: JSON.stringify(data)
+
     });
 
-    const context = await response.json();
-    if (response.ok && !context.hasOwnProperty('error')) {
+    if (response.headers.has('Content-Type')) {
+        const context = await response.json();
+        if (response.ok && context.hasOwnProperty('error')) {
+            errorInform(context.error);
+        } else {
+            errorInform(context.message);
+        }
+    } else {
         window.location.href = '/room/all';
+    }
+}
+
+function getRoom(roomId) {
+    const url = "/room/" + roomId;
+    const response = fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: "GET"
+    });
+
+    const context = response.json();
+    if (response.ok && context.hasOwnProperty('corners')) {
+        const corners = context.corners;
+        for (let i = 0; i < corners.length; i++) {
+            addCorner(corners[i].x, corners[i].y);
+        }
     } else {
         errorInform(context.error);
     }
 }
+

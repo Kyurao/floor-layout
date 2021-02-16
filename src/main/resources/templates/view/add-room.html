@@ -4,7 +4,7 @@
     <body>
     <div class="container">
         <div th:replace="part/fragments :: top-menu"></div>
-        <script th:src="@{/js/createRoom.js}"></script>
+        <script th:src="@{/js/create-edit-room.js}"></script>
         <div class="row">
             <div class="col">
                 <h4 class="text-center text-dark">Add corners and create new room:</h4>
@@ -70,7 +70,8 @@
             </div>
             <div class="col-sm-4 mb-3">
                 <button type="button" class="btn btn-outline-dark w-100"
-                        onclick="addCorner()">Add corner</button>
+                        onclick="addCorner($('#coordinateX').val(), $('#coordinateY').val());
+                                clearInput($('#coordinateX'), $('#coordinateY'));">Add corner</button>
             </div>
         </div>
         <div class="row">
