@@ -3,10 +3,7 @@ package com.kyurao.floorlayout.service;
 import com.kyurao.floorlayout.domain.Point;
 import com.kyurao.floorlayout.dto.PointDto;
 import com.kyurao.floorlayout.exception.RoomException;
-import com.kyurao.floorlayout.service.rules.AtLeastFourCornersRule;
-import com.kyurao.floorlayout.service.rules.NoDiagonalRule;
-import com.kyurao.floorlayout.service.rules.RoomFinishedArea;
-import com.kyurao.floorlayout.service.rules.Rule;
+import com.kyurao.floorlayout.service.rules.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -24,6 +21,7 @@ public class ValidatorService {
         rules.add(new AtLeastFourCornersRule());
         rules.add(new RoomFinishedArea());
         rules.add(new NoDiagonalRule());
+        rules.add(new NoIntersectRule());
     }
 
     public List<Point> getValidatedCorners(List<PointDto> corners) {
