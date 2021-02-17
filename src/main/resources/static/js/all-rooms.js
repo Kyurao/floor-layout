@@ -14,7 +14,7 @@ function addRoomToTable(room) {
             .append($('<td>')
                 .append($('<button>')
                     .attr('type', 'button')
-                    .attr('value', room.corners)
+                    .attr('value', JSON.stringify(room.corners))
                     .attr('class', 'btn btn-outline-dark w-25 mx-3')
                     .attr('onclick', 'onclick=viewRoom(this)')
                     .text('View')
@@ -75,9 +75,23 @@ async function deleteRoom(oButton) {
 }
 
 function viewRoom(oButton) {
-    const id = $(oButton).closest('tr').find('td:eq(0)').find('span').text();
-    console.log('view room ' + id);
+    const points = JSON.parse($(oButton).val());
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+    }
+    ctx.lineTo(points[0].x, points[0].y);
+    ctx.stroke();
+    ctx.closePath();
     $('#viewModal').modal('show');
+}
+
+function closeView() {
+
 }
 
 function editRoom(oButton) {
