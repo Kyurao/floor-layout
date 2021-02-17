@@ -81,7 +81,14 @@
             <div class="col">
                 <button type="button"
                         class="btn btn-dark w-100"
-                        th:onclick="saveRoom([[${roomId}]])">Save room</button>
+                        onclick="saveRoom([[${roomId}]])">Save room</button>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <a type="button"
+                        class="btn btn-danger w-100"
+                        href="/view/all">Cancel</a>
             </div>
         </div>
     </div>
