@@ -23,7 +23,7 @@ function addCorner(x, y) {
                     .attr('type', 'button')
                     .attr('value', 'Remove')
                     .attr('class', 'btn btn-outline-secondary w-50')
-                    .attr('onclick', 'removeCorner(this)')
+                    .attr('onclick', 'removeRow(this)')
                 )
             )
         );
@@ -32,10 +32,6 @@ function addCorner(x, y) {
 function clearInput($x, $y) {
     $x.val('');
     $y.val('');
-}
-
-function removeCorner(oButton) {
-    $(oButton).closest('tr').remove();
 }
 
 function editCorner(oButton) {
@@ -84,7 +80,6 @@ async function saveRoom(id) {
         headers: headers,
         method: method,
         body: JSON.stringify(data)
-
     });
 
     if (response.headers.has('Content-Type')) {
@@ -100,12 +95,12 @@ async function saveRoom(id) {
 }
 
 async function getRoom(roomId) {
-    const url = "/room/" + roomId;
-    const response = await fetch(url, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: "GET"
+    const path = '/room/' + roomId;
+    const headers = {'Content-Type': 'application/json'};
+    const method = 'GET';
+    const response = await fetch(path, {
+        headers: headers,
+        method: method,
     });
 
     const context = await response.json();
