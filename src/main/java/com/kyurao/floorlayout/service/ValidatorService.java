@@ -37,8 +37,11 @@ public class ValidatorService {
 
     private Point toPoint(PointDto req) {
         try {
-            Integer x = Integer.valueOf(req.getX());
-            Integer y = Integer.valueOf(req.getY());
+            int x = Integer.parseInt(req.getX());
+            int y = Integer.parseInt(req.getY());
+            if (x < 0 || x > 200 || y < 0 || y > 200) {
+                throw new RoomException("The coordinates must be in the range of 0 to 200");
+            }
             Point point = new Point();
             point.setX(x);
             point.setY(y);
