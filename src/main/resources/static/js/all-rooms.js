@@ -12,23 +12,26 @@ function addRoomToTable(room) {
                 )
             )
             .append($('<td>')
-                .append($('<input>')
+                .append($('<button>')
                     .attr('type', 'button')
-                    .attr('value', 'View')
+                    .attr('value', room.corners)
                     .attr('class', 'btn btn-outline-dark w-25 mx-3')
                     .attr('onclick', 'onclick=viewRoom(this)')
+                    .text('View')
                 )
-                .append($('<input>')
+                .append($('<button>')
                     .attr('type', 'button')
-                    .attr('value', 'Edit')
+                    .attr('value', room.id)
                     .attr('class', 'btn btn-outline-dark w-25 mx-3')
                     .attr('onclick', 'onclick=editRoom(this)')
+                    .text('Edit')
                 )
-                .append($('<input>')
+                .append($('<button>')
                     .attr('type', 'button')
-                    .attr('value', 'Delete')
+                    .attr('value', room.id)
                     .attr('class', 'btn btn-outline-danger w-25 mx-3')
                     .attr('onclick', 'onclick=deleteRoom(this)')
+                    .text('Delete')
                 )
             )
         );
@@ -54,7 +57,7 @@ async function getAllRooms() {
 }
 
 async function deleteRoom(oButton) {
-    const id = $(oButton).closest('tr').find('td:eq(0)').find('span').text();
+    const id = $(oButton).val();
     const path = '/room/delete/' + id;
     const headers = {'Content-Type': 'application/json'};
     const method = 'DELETE';
@@ -74,10 +77,11 @@ async function deleteRoom(oButton) {
 function viewRoom(oButton) {
     const id = $(oButton).closest('tr').find('td:eq(0)').find('span').text();
     console.log('view room ' + id);
+    $('#viewModal').modal('show');
 }
 
 function editRoom(oButton) {
-    const id = $(oButton).closest('tr').find('td:eq(0)').find('span').text();
+    const id = $(oButton).val();
     window.location.href = '/view/edit/' + id;
 }
 
