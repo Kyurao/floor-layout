@@ -13,17 +13,19 @@ function addCorner(x, y) {
                 )
             )
             .append($('<td>')
-                .append($('<input>')
+                .append($('<button>')
                     .attr('type', 'button')
                     .attr('value', 'Edit')
                     .attr('class', 'btn btn-outline-secondary w-25 mx-3')
                     .attr('onclick', 'editCorner(this)')
+                    .text('Edit')
                 )
-                .append($('<input>')
+                .append($('<button>')
                     .attr('type', 'button')
-                    .attr('value', 'Remove')
+                    .attr('value', 'Delete')
                     .attr('class', 'btn btn-outline-danger w-25 mx-3')
                     .attr('onclick', 'removeRow(this)')
+                    .text('Delete')
                 )
             )
         );
@@ -41,7 +43,6 @@ function editCorner(oButton) {
     $('#editY').val($(row).find('td:eq(1)').find('span').text());
     $('#editSave').val(index);
     $('#editModal').modal('show');
-
 }
 
 function saveEditing(oButton) {

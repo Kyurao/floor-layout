@@ -1,4 +1,5 @@
 function addRoomToTable(room) {
+
     $('#roomsTable tbody')
         .append($('<tr>')
             .append($('<td>')
@@ -16,21 +17,21 @@ function addRoomToTable(room) {
                     .attr('type', 'button')
                     .attr('value', JSON.stringify(room.corners))
                     .attr('class', 'btn btn-outline-dark w-25 mx-3')
-                    .attr('onclick', 'onclick=viewRoom(this)')
+                    .attr('onclick', 'viewRoom(this)')
                     .text('View')
                 )
                 .append($('<button>')
                     .attr('type', 'button')
                     .attr('value', room.id)
                     .attr('class', 'btn btn-outline-dark w-25 mx-3')
-                    .attr('onclick', 'onclick=editRoom(this)')
+                    .attr('onclick', 'editRoom(this)')
                     .text('Edit')
                 )
                 .append($('<button>')
                     .attr('type', 'button')
                     .attr('value', room.id)
                     .attr('class', 'btn btn-outline-danger w-25 mx-3')
-                    .attr('onclick', 'onclick=deleteRoom(this)')
+                    .attr('onclick', 'deleteRoom(this)')
                     .text('Delete')
                 )
             )
@@ -78,20 +79,21 @@ function viewRoom(oButton) {
     const points = JSON.parse($(oButton).val());
     const canvas = document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
-    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(points[0].x, points[0].y);
     for (let i = 1; i < points.length; i++) {
         ctx.lineTo(points[i].x, points[i].y);
     }
     ctx.lineTo(points[0].x, points[0].y);
-    ctx.stroke();
+    ctx.fillStyle = '#454d55';
+    ctx.fill();
     ctx.closePath();
-    $('#viewModal').modal('show');
-}
 
-function closeView() {
-
+    const $viewModal = $('#viewModal');
+    $viewModal.on('hidden.bs.modal', function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+    $viewModal.modal('show');
 }
 
 function editRoom(oButton) {
