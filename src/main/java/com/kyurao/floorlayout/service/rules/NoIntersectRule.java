@@ -51,7 +51,7 @@ public class NoIntersectRule implements Rule{
             return true;
         }
         else {
-            return p2.equals(p3) || p2.equals(p4);
+            return p1.equals(p3) || p1.equals(p4) || p2.equals(p3) || p2.equals(p4);
         }
     }
 
